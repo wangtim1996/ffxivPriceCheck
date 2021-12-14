@@ -113,49 +113,49 @@ ExarchicStore = [
     , ExarchicItem("Exarchic Gauntlets of Fending" ,31833,33)
     , ExarchicItem("Exarchic Hose of Fending" ,31834,42)
     , ExarchicItem("Exarchic Sabatons of Fending" ,31835,33)
-    , ExarchicItem("Exarchic Plate Belt of Fending",31836, 21)
+    #, ExarchicItem("Exarchic Plate Belt of Fending",31836, 21)
     ###################
     , ExarchicItem("Exarchic Circlet of Maiming",31837, 33)
     , ExarchicItem("Exarchic Mail of Maiming",31838, 42)
     , ExarchicItem("Exarchic Gauntlets of Maiming",31839, 33)
     , ExarchicItem("Exarchic Hose of Maiming",31840, 42)
     , ExarchicItem("Exarchic Sabatons of Maiming",31841, 33)
-    , ExarchicItem("Exarchic Plate Belt of Maiming",31842, 21)
+    #, ExarchicItem("Exarchic Plate Belt of Maiming",31842, 21)
     ###################
     , ExarchicItem("Exarchic Hood of Striking",31843, 33)
     , ExarchicItem("Exarchic Top of Striking",31844, 42)
     , ExarchicItem("Exarchic Armguards of Striking",31845, 33)
     , ExarchicItem("Exarchic Bottoms of Striking",31846, 42)
     , ExarchicItem("Exarchic Boots of Striking",31847, 33)
-    , ExarchicItem("Exarchic Sash of Striking",31848, 21)
+    #, ExarchicItem("Exarchic Sash of Striking",31848, 21)
     ###################
     , ExarchicItem("Exarchic Hood of Aiming",31849, 33)
     , ExarchicItem("Exarchic Top of Aiming",31850, 42)
     , ExarchicItem("Exarchic Armguards of Aiming",31851, 33)
     , ExarchicItem("Exarchic Bottoms of Aiming",31852, 42)
     , ExarchicItem("Exarchic Boots of Aiming",31853, 33)
-    , ExarchicItem("Exarchic Sash of Aiming",31854, 21)
+    #, ExarchicItem("Exarchic Sash of Aiming",31854, 21)
     ###################
     , ExarchicItem("Exarchic Hood of Scouting",31855, 33)
     , ExarchicItem("Exarchic Top of Scouting",31856, 42)
     , ExarchicItem("Exarchic Armguards of Scouting",31857, 33)
     , ExarchicItem("Exarchic Bottoms of Scouting",31858, 42)
     , ExarchicItem("Exarchic Boots of Scouting",31859, 33)
-    , ExarchicItem("Exarchic Sash of Scouting",31860, 21)
+    #, ExarchicItem("Exarchic Sash of Scouting",31860, 21)
     ###################
     , ExarchicItem("Exarchic Circlet of Healing",31861, 33)
     , ExarchicItem("Exarchic Coat of Healing",31862, 42)
     , ExarchicItem("Exarchic Gloves of Healing",31863, 33)
     , ExarchicItem("Exarchic Hose of Healing",31864, 42)
     , ExarchicItem("Exarchic Shoes of Healing",31865, 33)
-    , ExarchicItem("Exarchic Plate Belt of Healing",31866, 21)
+    #, ExarchicItem("Exarchic Plate Belt of Healing",31866, 21)
     ###################
     , ExarchicItem("Exarchic Hat of Casting",31867, 33)
     , ExarchicItem("Exarchic Coat of Casting",31868, 42)
     , ExarchicItem("Exarchic Gloves of Casting",31869, 33)
     , ExarchicItem("Exarchic Hose of Casting",31870, 42)
     , ExarchicItem("Exarchic Shoes of Casting",31871, 33)
-    , ExarchicItem("Exarchic Plate Belt of Casting",31872, 21)
+    #, ExarchicItem("Exarchic Plate Belt of Casting",31872, 21)
     ###################
     , ExarchicItem("Exarchic Earrings of Fending",31873, 21)
     , ExarchicItem("Exarchic Earrings of Slaying",31874, 21)
@@ -224,7 +224,7 @@ def curr_marketboard_low(item, filter=HqFilter.NONE, server="primal", cutoff=999
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
 
-    command = "bicolor"
+    command = "exarchic"
 
     if command == "bicolor":
         bicolorResults = []
