@@ -221,34 +221,46 @@ def curr_marketboard_low(item, filter=HqFilter.NONE, server="primal", cutoff=999
     print(item.name + " " + str(estVal))
     return estVal
 
+
+def get_best_bicolor():
+    bicolorResults = []
+    for item in BicolorStore:
+        avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
+        bicolorResults.append((avgprice, item.name))
+
+    bicolorResults.sort(reverse=True)
+    #print(bicolorResults)
+    return bicolorResults
+
+
 # Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-
-    command = "exarchic"
-
-    if command == "bicolor":
-        bicolorResults = []
-        for item in BicolorStore:
-            avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
-            bicolorResults.append((avgprice, item.name))
-
-        bicolorResults.sort(reverse=True)
-        print(bicolorResults)
-    elif command == "allegory":
-        results = []
-        for item in AllegoryStore:
-            avgprice = curr_marketboard_low(item)
-            results.append(((avgprice/item.cost), item.name))
-
-        results.sort(reverse=True)
-        print(results)
-    elif command == "exarchic":
-        exarchicResults = []
-        for item in ExarchicStore:
-            avgprice = curr_marketboard_low(item, HqFilter.HQ)
-            exarchicResults.append(((item.value / avgprice), item.name))
-        exarchicResults.sort(reverse=True)
-        print(exarchicResults)
+# if __name__ == '__main__':
+#
+#     command = "bicolor"
+#
+#     if command == "bicolor":
+#         bicolorResults = []
+#         for item in BicolorStore:
+#             avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
+#             bicolorResults.append((avgprice, item.name))
+#
+#         bicolorResults.sort(reverse=True)
+#         print(bicolorResults)
+#     elif command == "allegory":
+#         results = []
+#         for item in AllegoryStore:
+#             avgprice = curr_marketboard_low(item)
+#             results.append(((avgprice/item.cost), item.name))
+#
+#         results.sort(reverse=True)
+#         print(results)
+#     elif command == "exarchic":
+#         exarchicResults = []
+#         for item in ExarchicStore:
+#             avgprice = curr_marketboard_low(item, HqFilter.HQ)
+#             exarchicResults.append(((item.value / avgprice), item.name))
+#         exarchicResults.sort(reverse=True)
+#         print(exarchicResults)
 
 
 
