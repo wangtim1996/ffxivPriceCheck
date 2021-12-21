@@ -42,6 +42,7 @@ pipeline {
         }
         success {
           sh '''source venv/bin/activate
+                cp ~/.env .
                 pm2 restart bot.py --interpreter python3
               '''
         }
