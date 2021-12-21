@@ -40,6 +40,11 @@ pipeline {
         always {
             echo "done"
         }
+        success {
+          sh '''source venv/bin/activate
+                pm2 restart bot.py --interpreter python3
+              '''
+        }
         failure {
             echo "Send e-mail, when failed"
         }
