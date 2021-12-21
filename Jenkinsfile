@@ -47,6 +47,7 @@ pipeline {
         }
         failure {
             echo "Send e-mail, when failed"
+            sh 'pwd'
         }
     }
 }
