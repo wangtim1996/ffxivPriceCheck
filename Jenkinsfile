@@ -21,14 +21,14 @@ pipeline {
         stage('Build environment') {
             steps {
                 sh '''python3 -m venv venv
-                      source activate venv
+                      source venv/bin/activate
                       pip install -r requirements.txt
                     '''
             }
         }
         stage('Test environment') {
             steps {
-                sh '''source activate ${BUILD_TAG}
+                sh '''source venv/bin/activate
                       pip list
                       which pip
                       which python
