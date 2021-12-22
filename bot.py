@@ -16,6 +16,11 @@ bot = commands.Bot(command_prefix='!')
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
+
+@bot.command(name='version')
+async def versionCheck(context):
+    await context.send("0.1")
+
 @bot.command(name='bicolor')
 async def bicolor(context):
     result = get_best_bicolor()
@@ -24,5 +29,6 @@ async def bicolor(context):
         response += str(x+1) + ": " + str(result[x][1]) + " (" + str(result[x][0]) + ")\n"
 
     await context.send(response)
+
 
 bot.run(TOKEN)
