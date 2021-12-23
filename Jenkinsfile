@@ -1,16 +1,6 @@
 pipeline {
     agent any
 
-    triggers {
-        pollSCM('*/5 * * * 1-5')
-    }
-    options {
-        skipDefaultCheckout(true)
-        // Keep the 10 most recent builds
-        buildDiscarder(logRotator(numToKeepStr: '10'))
-        timestamps()
-    }
-
     stages {
 
         stage ("Code pull"){
@@ -29,10 +19,9 @@ pipeline {
         stage('Test environment') {
             steps {
                 sh '''source venv/bin/activate
-                      pip list
-                      which pip
-                      which python
                     '''
+
+                sh 'pytest test_marketboard.py'
             }
         }
     }
@@ -47,8 +36,7 @@ pipeline {
               '''
         }
         failure {
-            echo "Send e-mail, when failed"
-            sh 'pwd'
+            echo "Build failed"
         }
     }
 }
