@@ -19,9 +19,8 @@ pipeline {
         stage('Test environment') {
             steps {
                 sh '''source venv/bin/activate
+                        pytest test_marketboard.py
                     '''
-
-                sh 'pytest test_marketboard.py'
             }
         }
     }
