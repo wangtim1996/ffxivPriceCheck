@@ -19,7 +19,7 @@ async def on_ready():
 
 @bot.command(name='version')
 async def versionCheck(context):
-    await context.send("0.20")
+    await context.send("FAIL")
 
 @bot.command(name='bicolor')
 async def bicolor(context):
