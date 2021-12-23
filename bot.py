@@ -19,14 +19,17 @@ async def on_ready():
 
 @bot.command(name='version')
 async def versionCheck(context):
-    await context.send("0.12")
+    await context.send("0.20")
 
 @bot.command(name='bicolor')
 async def bicolor(context):
     result = get_best_bicolor()
     response = ""
     for x in range(min(5, len(result))):
-        response += str(x+1) + ": " + str(result[x][1]) + " (" + str(result[x][0]) + ")\n"
+        response_line = f"{x+1}: {result[x].name} (marketboard: {result[x].price}) [value: {result[x].value}]\n"
+        response += response_line
+        # response += str(x+1) + ": " + str(result[x].name)\
+        #     + " (marketboard: " + str(result[x].price) + " gil | value: " + str(result[x].value) + ")\n"
 
     await context.send(response)
 
