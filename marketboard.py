@@ -15,8 +15,12 @@ import pandas as pd
 load_dotenv()
 sheet_id = os.getenv('SHEET_ID')
 bicolor_sheet = "Bicolor"
-url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={bicolor_sheet}"
-bicolor_data = pd.read_csv(url)
+bicolor_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={bicolor_sheet}"
+bicolor_data = pd.read_csv(bicolor_url)
+
+aphorism_sheet = "Aphorism"
+aphorism_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={aphorism_sheet}"
+aphorism_data = pd.read_csv(aphorism_url)
 
 class HqFilter(Enum):
     NONE = 0
@@ -80,4 +84,15 @@ def get_best_bicolor():
 
     bicolor_results.sort(reverse=True)
     return bicolor_results
+
+def get_best_aphorism():
+    aphorism_results = []
+
+    for item in aphorism_data.itertuples():
+        avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
+        value = avgprice / item.Price
+        aphorism_results.append(ItemData(value, item.Name, avgprice))
+
+    aphorism_results.sort(reverse=True)
+    return aphorism_results
 
