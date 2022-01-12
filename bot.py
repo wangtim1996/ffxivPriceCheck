@@ -43,4 +43,12 @@ async def aphorism(context):
 
     await context.send(response)
 
+
+@bot.command(name='help')
+async def aphorism(context):
+    response = "!bicolor - best bicolor gemstone item to sell\n"
+    response += "!aphorism - best material to sell on marketboard\n"
+    await context.send(response)
+
+
 bot.run(TOKEN)
