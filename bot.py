@@ -10,19 +10,47 @@ load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
 
-bot = commands.Bot(command_prefix='!')
+# Change only the no_category default string
+help_command = commands.DefaultHelpCommand(
+    no_category = 'Commands'
+)
+
+bot = commands.Bot(
+    command_prefix='!',
+    help_command = help_command)
+
+def filter_channel(context):
+    if(context.guild.id == 519366887570800640):
+        if(context.channel.id == 883979459785527336):
+            return True
+        else:
+            return False
+    elif(context.guild.id == 920867523753291807):
+        if(context.channel.id == 920867524327927880):
+            return True
+        else:
+            return False
+    else:
+        return True
+
 
 @bot.event
 async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
 
-@bot.command(name='version')
+@bot.command(name='version',
+             help='Returns current version.')
 async def versionCheck(context):
-    await context.send("0.30")
+    if(not filter_channel(context)):
+        return
+    await context.send("0.31")
 
-@bot.command(name='bicolor')
+@bot.command(name='bicolor',
+             help='Gets the top 5 best bicolor materials to sell.')
 async def bicolor(context):
+    if(not filter_channel(context)):
+        return
     result = get_best_bicolor()
     response = ""
     for x in range(min(5, len(result))):
@@ -33,8 +61,11 @@ async def bicolor(context):
 
     await context.send(response)
 
-@bot.command(name='aphorism')
+@bot.command(name='aphorism',
+             help='Gets the top 5 best aphorism materials to sell.')
 async def aphorism(context):
+    if(not filter_channel(context)):
+        return
     result = get_best_aphorism()
     response = ""
     for x in range(min(5, len(result))):
@@ -42,13 +73,5 @@ async def aphorism(context):
         response += response_line
 
     await context.send(response)
-
-
-@bot.command(name='help')
-async def aphorism(context):
-    response = "!bicolor - best bicolor gemstone item to sell\n"
-    response += "!aphorism - best material to sell on marketboard\n"
-    await context.send(response)
-
 
 bot.run(TOKEN)
