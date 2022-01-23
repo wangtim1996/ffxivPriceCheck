@@ -22,6 +22,14 @@ aphorism_sheet = "Aphorism"
 aphorism_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={aphorism_sheet}"
 aphorism_data = pd.read_csv(aphorism_url)
 
+poetics_sheet = "Poetics"
+poetics_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={poetics_sheet}"
+poetics_data = pd.read_csv(poetics_url)
+
+guildseals_sheet = "GuildSeals"
+guildseals_url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv&sheet={guildseals_sheet}"
+guildseals_data = pd.read_csv(guildseals_url)
+
 class HqFilter(Enum):
     NONE = 0
     HQ = 1
@@ -75,24 +83,53 @@ def curr_marketboard_low(item, filter=HqFilter.NONE, server="primal", cutoff=999
 # Returns the list sorted by best value
 # Tuple : (value, name, marketboard price)
 def get_best_bicolor():
-    bicolor_results = []
+    results = []
 
     for item in bicolor_data.itertuples():
         avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
         value = avgprice / item.Price
-        bicolor_results.append(ItemData(value, item.Name, avgprice))
+        results.append(ItemData(value, item.Name, avgprice))
 
-    bicolor_results.sort(reverse=True)
-    return bicolor_results
+    results.sort(reverse=True)
+    return results
 
 def get_best_aphorism():
-    aphorism_results = []
+    results = []
 
     for item in aphorism_data.itertuples():
         avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
         value = avgprice / item.Price
-        aphorism_results.append(ItemData(value, item.Name, avgprice))
+        results.append(ItemData(value, item.Name, avgprice))
 
-    aphorism_results.sort(reverse=True)
-    return aphorism_results
+    results.sort(reverse=True)
+    return results
+
+def get_best_poetic():
+    results = []
+
+    for item in poetics_data.itertuples():
+        avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
+        value = avgprice / item.Price
+        results.append(ItemData(value, item.Name, avgprice))
+
+
+    for item in guildseals_data.itertuples():
+        avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
+        value = avgprice / (item.Price) * 1778 / 170
+        results.append(ItemData(value, item.Name + "*", avgprice))
+
+    results.sort(reverse=True)
+
+    return results
+
+def get_best_guildseal():
+    results = []
+    for item in guildseals_data.itertuples():
+        avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
+        value = avgprice / item.Price
+        results.append(ItemData(value, item.Name, avgprice))
+
+    results.sort(reverse=True)
+
+    return results
 
