@@ -61,8 +61,28 @@ def access_marketboard(item, filter=HqFilter.NONE, server="primal"):
     print(item.name + " " + str(dotProduct / totalWeight))
     return dotProduct / totalWeight
 
-# cutoff is hella hacky
 def curr_marketboard_low(item, filter=HqFilter.NONE, server="primal", cutoff=99999):
+    response = requests.get("https://universalis.app/api/"+server+"/" + str(item.ID))
+    data = response.json()
+    prices = []
+    for listing in data["listings"]:
+        if filter == HqFilter.HQ and listing["hq"] is False:
+            continue
+        if filter == HqFilter.NQ and listing["hq"] is True:
+            continue
+        prices.append(listing["pricePerUnit"])
+        cutoff = cutoff - 1
+        if cutoff < 0:
+            break
+
+
+    count = min(len(prices), 10)
+    estVal = mean(nsmallest(count, prices))
+    print(item.Name + " " + str(estVal))
+    return estVal
+
+# cutoff is hella hacky
+def hist_marketboard_low(item, filter=HqFilter.NONE, server="primal", cutoff=99999):
     response = requests.get("https://universalis.app/api/history/"+server+"/" + str(item.ID))
     data = response.json()
     prices = []
@@ -76,7 +96,9 @@ def curr_marketboard_low(item, filter=HqFilter.NONE, server="primal", cutoff=999
         if cutoff < 0:
             break
 
-    estVal = mean(nsmallest(10, prices))
+
+    count = min(len(prices), 10)
+    estVal = mean(nsmallest(count, prices))
     print(item.Name + " " + str(estVal))
     return estVal
 
@@ -86,7 +108,7 @@ def get_best_bicolor():
     results = []
 
     for item in bicolor_data.itertuples():
-        avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
+        avgprice = hist_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
         value = avgprice / item.Price
         results.append(ItemData(value, item.Name, avgprice))
 
@@ -97,7 +119,7 @@ def get_best_aphorism():
     results = []
 
     for item in aphorism_data.itertuples():
-        avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
+        avgprice = hist_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
         value = avgprice / item.Price
         results.append(ItemData(value, item.Name, avgprice))
 
@@ -108,13 +130,13 @@ def get_best_poetic():
     results = []
 
     for item in poetics_data.itertuples():
-        avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
+        avgprice = hist_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
         value = avgprice / item.Price
         results.append(ItemData(value, item.Name, avgprice))
 
 
     for item in guildseals_data.itertuples():
-        avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
+        avgprice = hist_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
         value = avgprice / (item.Price) * 1778 / 170
         results.append(ItemData(value, item.Name + "*", avgprice))
 
@@ -125,7 +147,7 @@ def get_best_poetic():
 def get_best_guildseal():
     results = []
     for item in guildseals_data.itertuples():
-        avgprice = curr_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
+        avgprice = hist_marketboard_low(item, HqFilter.NONE, "Hyperion", 50)
         value = avgprice / item.Price
         results.append(ItemData(value, item.Name, avgprice))
 
