@@ -45,7 +45,7 @@ async def on_ready():
 async def versionCheck(context):
     if(not filter_channel(context)):
         return
-    await context.send("0.4")
+    await context.send("0.5")
 
 @bot.command(name='bicolor',
              help='Gets the top 5 best bicolor materials to sell.')
