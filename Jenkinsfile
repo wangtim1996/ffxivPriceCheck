@@ -31,7 +31,7 @@ pipeline {
         success {
           sh '''source venv/bin/activate
                 cp ~/.env .
-                pm2 restart bot.py --interpreter ./venv/bin/python
+                /usr/local/bin/pm2 restart bot.py --interpreter ./venv/bin/python
               '''
         }
         failure {
