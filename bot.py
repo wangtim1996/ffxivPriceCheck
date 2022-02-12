@@ -44,6 +44,7 @@ async def on_ready():
              help='Returns current version.')
 async def versionCheck(context):
     if(not filter_channel(context)):
+        await context.send("Please use this command in the appropriate channel.")
         return
     await context.send("0.5")
 
@@ -51,6 +52,7 @@ async def versionCheck(context):
              help='Gets the top 5 best bicolor materials to sell.')
 async def bicolor(context):
     if(not filter_channel(context)):
+        await context.send("Please use this command in the appropriate channel.")
         return
 
     result = get_best_bicolor()
@@ -66,6 +68,7 @@ async def bicolor(context):
              help='Gets the top 5 best aphorism materials to sell.')
 async def aphorism(context):
     if(not filter_channel(context)):
+        await context.send("Please use this command in the appropriate channel.")
         return
 
     result = get_best_aphorism()
@@ -81,6 +84,7 @@ async def aphorism(context):
              help='Gets the top 5 best poetics materials to sell. Items with * are guild seal materials')
 async def poetic(context):
     if(not filter_channel(context)):
+        await context.send("Please use this command in the appropriate channel.")
         return
 
     result = get_best_poetic()
@@ -97,6 +101,7 @@ async def poetic(context):
              help='Gets the top 5 best poetics materials to sell. Items with * are guild seal materials')
 async def guildseal(context):
     if(not filter_channel(context)):
+        await context.send("Please use this command in the appropriate channel.")
         return
 
     result = get_best_guildseal()
